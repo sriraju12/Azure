@@ -1,0 +1,799 @@
+Monitoring Services:
+
+   
+      Log Analytics workspace:
+                               It is a centralized logging repository.
+
+                               *  if you want to get log data into log analytics workspace, first you need to configure the virtual machine.
+                                  virtual machines, storage accounts and activity logs.
+                               * only single Vm can be attached to a single log analytics workspace
+
+                                steps:
+                                        1.create the  Log Analytics workspace.
+                                        2.inside the Log Analytics workspace, you can attach the virtual machines to it from the left side bar.
+                                        3.you can setup the storage accounts and activity logs.
+                      
+
+      Azure monitor:  (replacement of log analytics workspace)
+                      1.collects performance metrics
+                      2.collect log events and query logs 
+                      3.monitor performance
+                      4.alerts and dashboard.
+
+       * you enable notification for the vm's for the metrics or logs. for that select vm, on left side on the monitor you can find the alerts.
+         there you can create the alerts.
+
+       * application insights:
+                                These application insights will give the in depth information about the respective item.
+
+       * CSV and PDF file formats are available for downloading Azure Advisor security recommendations
+
+       * we can create the dashboard for the metrics -> for example vm's metric  1.go to vm overview and then go to metrics
+                                                                                 2.select the metric you to send to dashboard and click on pin to dashbaord
+                                                                                 3.there you can select the dashboard if already exist or you can create it
+                                                                                 4.do the same for all the metrics you want send data to dashboard.
+                                                                                 5.search for dashbaord in all resources and select the dashboard,
+                                                                                   you'll find data about metrics.
+
+      * you can create the billing alert -> 1.search for subscription and select the subscription.
+                                            2.inside subscription, go to budget and give details that's it.	
+
+      * What happens when you share a Dashboard -> It is published as an Azure resource
+
+      * What is required when alert notifications via SMS text are needed -> action group
+
+      * You need to track who stopped a virtual machine on a given date. What should you look at -> VM activity log 
+
+
+
+Resource Governance:
+
+   
+        * azure management groups:
+                                    it is used to organize the multiple subscriptions.
+        * azure resource groups:
+                                 it is used to organize or group cloud resource.
+        * azure policy initiatives:
+                                    policies are organized into groups.
+        * azure blueprint:
+                           Azure Blueprints makes it possible for development teams to rapidly build and start up new environments with trust 
+                           they're building within organizational compliance with a set of built-in components, such as networking,
+                           to speed up development and delivery.
+
+                           * while creating the blueprint, you need add the artifact.artifact type 1.policy assignment
+                                                                                                   2.role assignment
+                                                                                                   3.resource manager template(subscription)
+                                                                                                   4.resource group.
+
+       * you can create the RBAC roles using azure portal,CLI(az role definition create --role-definition c:/mycustomerrole.json(file path)),power shell.
+
+       * JSON file format is used for custom RBAC role definition files.
+     
+       * Get-AzRoleAssignment -> PowerShell cmdlet shows roles applied to a user
+
+       * az tag add-value -> Azure CLI command is used to create new tag values
+
+       * Which benefits can be derived from locking Azure resources -> prevents modification and deletion.
+
+       * ARM -> Azure Resource Manager.
+
+       * azure subscription is linked to azure AD tenants. azure subscription are free trial, pay-as-you-go and enterprise agreement.
+
+       * az account set --subscription "subscription-name" -> it will change one subscription to another subscription through CLI of tenant.
+
+       * get-azureadtenantdetail -> it will the current tenant details in powershell.
+   
+       * get-azsubscription -> it will display the subscription-id, type-of-subscription and tenant-id in powershell.
+
+         let's see how we can organize or group the subscription using management resources -> 1.go to management group and create it.
+                                                                                               2.move the subscription to the management group 
+                                                                                                 by click on three dots.
+                                                                                               3.click on the management group and you can assign
+                                                                                                  role assignment to users.
+                                                                                               4.this subscription will be applied to these users.
+
+       * resource lock is of two types -> 1. read only
+                                          2. delete
+
+       * resource lock should be applied to subscription, resource group and individual resources.   
+
+
+         let's see how we can create the resource groups and resource lock -> 1.go to resource group and create the resource group.
+                                                                              2.create the resources that should be added into the resource group.
+                                                                              3.while creating resource, in resource group select the resource group 
+                                                                                that we have created.
+                                                                              4.go to subscription and click on lock and create the lock for this 
+                                                                              5.under the management group this lock will be applied.
+
+      * az account lock create --name "cannot delete scription" --lock-type CanNotDelete -> it will lock the resources through subscription using CLI.
+
+      * az group lock create --lock-type ReadOnly -n "cannot modify" -g rg1(resource-group-name) -> it will lock the resource at group level(resource group)
+                                                                                                    using CLI.
+
+      * az resource lock create --lock-type ReadOnly -n "cannot modify" -g rg1(resource-group-name) --resource rajustoraju12(resource-name) --resource-type
+        Microsoft.Storage/storageAccount -> it will lock this resource.
+
+      * az account lock list -o table -> it will display the all the locks.
+
+      * New-AzResourceLock -LockName NoModify -LockLevel ReadOnly --ResourceGroupName rg1 -> it will create the lock for resource at resource group level
+                                                                                             using PowerShell.
+
+      * RBAC role assignment -> this means giving the permission(like readonly) to the user for this resource.
+
+      * Which PowerShell cmdlet can be used to switch to a specific Azure subscription -> Select-AzSubscription
+
+      * Which PowerShell cmdlet shows existing resources locks -> Get-AzResourceLock
+
+      * How many tags can be assigned to a resource group -> 50
+
+      * RBAC:
+              RBAC is used to manage permission of the resources.
+   
+      * RBAC(Role Based Control Access) -> it will be applied to management group, subscription and individual resource.
+
+                                           * if you attach role at top level(management group), it will pass down to all low level(subscription and  
+                                             then to individual resource)
+
+      * creating custom RBAC role:
+                                   1.write the json file for the custom role.
+                                   2.open powershell and upload the file.
+                                   3.in powershell run -> new-azroledefinition --inputfile ./filename
+                                   4.go to subscription -> IAM -> search for the role named that you have created.
+                                   5.now we can assign this role to management group, subscription and individual resource
+
+     * Policy:
+               * Azure Policy controls the types of resource that can be deployed. 
+               * it control where resource can or cannot be deployed.	
+               * it is more granular than RBAC role.
+               * it will be applied to management group, subscription and resource group(contains group of cloud resources).
+               * if you attach role at top level(management group), it will pass down to all low level(subscription and  
+                 then to resource group)
+               * policy can not applied to individual resource.
+
+    * Assigning policy:
+                        1.go to policy and click on the definitions and then select the definition type and choose the policy.
+                        2.then click on assign and fill the details.
+                        3.click on assignments, there you can see the policy that you have assigned.
+
+
+   
+
+Container Solution:
+
+                      Let's see how we can create the containers in azure.
+
+    steps:
+           1.create the container instance and give the necesssary details.While creating the container instance
+             there an option where the image should be pulled 1.Azure container registry(just same as docker registry)
+                                                              2.Others means docker registry.
+           2.container will start running and go to containers from left side.there you can connect to the shell.
+
+          Azure container registry:
+                                   1.create the Azure container registry
+                                   2.you can push the images to this registry and use it.
+                                   3.login details for these registry will be available in access key(username and password).
+
+
+       * docker tag -> Docker CLI command renames a local container image
+
+
+
+
+Azure Authentication:
+                      
+
+      * azure passwordless login:
+                                   password is not required for authentication and instead of that we use different authentication category
+                                   such as microsoft authenticator app,security key etc.
+
+      let's see how we can enable passwordless login,
+
+         1.create the user and group and add the user to that group.
+         2.in users, click on the three dots and then click on per-user-MFA and then select the user that have created and click on enable.  
+         3.on left side, go to security -> authentication methods -> microsoft authenticator -> enable it -> select the group name that user added and 
+                               choose passwordless login.
+         4.login with that user and setup the microsoft authenticator app in device.
+         5.click on device -> all devices -> here it will show your device.
+
+
+    * azure Single Sign-On(SSO) :
+                                   SSO is an microsoft entra ID authentication method.
+                                   
+                                   * Removes the need to sign in to each app after initial sucessfull authentication.
+
+                                   * SSO is of three types 1.federation
+                                                           2.password
+                                                           3.linked.
+
+             * Identity federation claims:
+                                           * claims are assertions about a user or device.
+
+                                           * claims are contained within a digitally signed security token and are then consumed by apps.
+
+                                           * Claims: data-of-birth, subnet-IP, security clearence level, email address.
+
+                                  * flow -> 1.user will access the website
+                                            2.the website will redirect to authentication to login.
+                                            3.user will enter the password.
+                                            4.after sucessfull authentication then user will login to the website.
+
+
+   * enabling Self-Service Password Reset(SSPR):
+                                                  1.create the user and group and add the user to that group.
+                                                  2.in the user section, on the left side click on password and reset and then click on selected.
+                                                  3.select the group that user has been added and save it.
+                                                  4.test it.
+
+                                                  * go to user and on left side click on password and reset and then on left side click on authencation 
+                                                    method there you can select the ways to reset the password such as email,phone number,security question  
+                                                    etc.
+
+
+
+   * You need to assign permissions to code running in an Azure virtual machine. What should you enable? -> virtual machine managed identity.
+
+   * Which Azure AD configuration results in the creation of a service principal -> enterprise appl
+
+   * Azure authentication method can be used without access to a mobile device -> FIDO 2 security key
+
+   * Which types of attacks can be mitigated by using passwordless login -> phishing and password spraying
+
+   * Which term describes assertions about user or device attributes during federated authentication and authorization -> claims
+
+
+
+Azure CLI:
+           azure CLI is used to automate resource management tasks.
+
+           * az login -> to login into azure account
+           * az --version -> version of azure CLI
+           * az vm list -> it will all the vm's
+
+Resource Group:
+                * organize related resources together and manage related resources as a single entity.
+
+* functionality is unavailable when using the Azure mobile app -> creating azure functions
+
+* What happens when you attempt to delete a resource group that still contains resources? -> All resources deployed in the resource group are deleted with the resource group
+
+*  Which physical security mechanism uses a set of two doors where the outer door must close before the inner door opens? ->Access control vestibule
+
+* You are using the Azure CLI in interactive mode. You need to issue numerous storage account commands. 
+  Which command should you issue to minimize the amount of typing  -> %%storage
+
+* PowerShell cmdlet is used to authenticate to Azure -> Connect-AzAccount
+
+* Which Azure item contains one or more data centers -> Availability zone
+
+* Which PowerShell cmdlet lists storage accounts -> Get-AzStorageAccount
+
+* Which Azure CLI command shows the various Azure clouds -> az cloud list
+
+
+
+Azure Software development services:
+
+         
+       * function app -> which is used to trigger an event 
+                         Triggering off specific events and executing small bits of logic
+
+            Let's see how we can trigger event using function app,
+                                                                    1.create the storage account
+                                                                    2.In that storage account, create the queue
+                                                                    3.In that queue, create the message.
+                                                                    4.create the function app and inside create the function
+                                                                    5.in that function select the event as queue storage trigger.and
+                                                                      give the storage account details.
+
+                                                                    6.click on monitor and then logs, here we can see the message from queue.
+                                                                       from queue ,it will consumed the message.
+
+       * logic app -> create and run automated workflows with little to no code
+                      Executing workflows using no-code/low-code techniques
+
+            Let's see how we can automate the workflow of the message queue,
+                                                                               1.create the storage account
+                                                                               2.In that storage account, create the queue
+                                                                               3.In that queue, create the message.
+                                                                               4.create the logic app
+                                                                               5.go to storage account and then go to access key and then access key.
+                                                                               6.inside the logic app, click on logic app designer
+                                                                                 and click on blank logic app
+                                                                               7.search for azure queue and then select when there is a message in the queue
+                                                                               8.paste the access key and set timer to trigger for an event.
+                                                                               9.click on new step and select the get messages.
+                                                                               10.give the storage account details.
+                                                                               11.create the message in queue.
+                                                                               12.go to overview and click on trigger histroy.logs will be appered here.
+
+
+
+       * Which feature of Azure DevOps is used to store source code -> azure repos
+
+       * how Azure Blueprints helps organizations manage their Azure environments -> By enabling organizations to adhere to specific policies, 
+                                                                                     standards,and governance rules
+
+       * Which is the term used for contents of an Azure Storage Account Queue -> message.
+
+       * the primary role of Azure Blueprints -> Defining repeatable Azure resources according to organizational standards
+
+
+Note:
+
+      * You need virtual machines launched in a DevTest Lab to be fully updated when launched. What should you do -> vm formulas
+    
+      * Which type of cloud service model is Azure Container Instance -> PaaS
+
+      * Which term describes copying somebody else’s GitHub repo so that you can make changes -> forking
+
+      * How is a Logic app different from a Function app -> Logic apps do not require you to write code
+
+
+Management Tools:
+                   Management tools are used to automate the cloud management tasks.
+
+                   Azure CLI, Azure PowerShell, Azure CloudShell(present inside azure portal).
+
+                   * in bash we can run only Azure CLI commands and where as in PowerShell we can run both Azure CLI and Azure PowerShell Commands.
+
+
+        Azure CLI:
+                     * az login -> to login into azure account
+                     * az --version -> version of azure CLI
+                     * az vm list -> it will all the vm's
+                     * creating vm -> vmname="myVM"
+                                      username="azureuser"
+                                      az vm create \
+                                          --resource-group $resourcegroup \
+                                          --name $vmname \
+                                          --image Win2022AzureEditionCore \
+                                          --public-ip-sku Standard \
+                                          --admin-username $username
+
+                    * az vm list --query [].name -> it will display vm's names only.
+
+
+     PowerShell:
+                  *  Connect-AzAccount -> to login into azure account 
+                  * creating vm -> New-AzVm `
+                                       -ResourceGroupName 'myResourceGroup' `
+                                       -Name 'myVM' -Location 'eastus' `
+                                       -Image 'MicrosoftWindowsServer:WindowsServer:2022-datacenter-azure-edition:latest' `
+                                       -VirtualNetworkName 'myVnet' ` 
+                                       -SubnetName 'mySubnet' `
+                                       -SecurityGroupName 'myNetworkSecurityGroup' `
+                                       -PublicIpAddressName 'myPublicIpAddress' ` 
+                                       -OpenPorts 80,3389
+
+
+   * Which type of Azure object organizes related cloud objects together -> Resource Group.
+
+   * Which syntax is commonly used for Azure ARM templates -> JSON
+
+   * What is the maximum number of cloud resources that a single ARM template can deploy -> No Limit
+
+   * The first time Azure Cloud Shell launches, you are prompted to create which type of Azure resource -> storage account
+
+   * You are attempting to deploy an ARM template using the CLI but are receiving errors. What is wrong with the command syntax used?
+ 
+      az deployment group create --resource-group Rg1 --template-file website.json --parameters website.parameters.json ->
+           
+             The @ symbol is missing in front of the parameter file name
+
+   * what is the standard file extension for a PowerShell script -> ps1
+
+
+
+Security and Compliance:
+
+                           
+
+       * firewall:
+                   it is a managed service and controls inbound and outbound network traffic.
+
+         let's see how we can configure firewall,
+                                                  1. go to virtual network, create virtual network and go inside then go to subnet
+                                                  2.create the subnet with name AzureFirewallSubnet
+                                                  3.search for firewall in all resources and create the firewall, while creating the firewall
+                                                    choose virtual network as we created and create the new static public ip here only.
+                                                  4.search for route table in all resources and create the route table.
+                                                  5.inside route table, go to subnets and click on association then give the virtual network as we created
+                                                    and subnet as where this firewall should be placed(subnet-name).
+                                                  6.create the route and give the private ip of virtual network subnet.
+
+    * azure key vaults:
+                        it is a managed azure resource and provides centralized storage of security secrets.
+ 
+                        we can store keys, secrets and certificates
+ 
+                        let's see how we can create the key vault -> 1.go to key vault and create it.
+                                                                     2.while creating, choose valut access policy and give permission to the user.
+                                                                     3.you can add the group to access this key valut by clicking on add access policy.
+                                                                     4.inside key vault,you can create the keys, secrets and certificates.
+
+   * Which type of Azure Firewall rule maps a public IP and port to an internal IP and port -> DNAT Rules.
+
+   * Which type of Azure Firewall rule can limit outbound access to Facebook -> Application rules(it deals with DNS Names).
+
+   * Which security issue is addresses through an SLA -> Availability
+
+   * Which user account security recommendation enhances user sign-in security -> MFA
+
+
+   
+
+
+
+Azure Virtual Machines:
+                         
+
+     Let's see how we can resize the virtual machine -> 1.go to virtual machine and select the virtual mchine you want to resize
+                                                        2.inside virtual size, go to size and select the size you want and click on resize.
+                                                        3.virtual machine will be resized.
+
+
+    Let's see how we can login to the virtual machine using privatekey -> 1.download the putty locally
+                                                                          2.open the putty and load the private key into it
+                                                                          3.take the public-ip of the virtual machine and give the password for private key
+                                                                          4.save it and then click on connect.
+                                                                          5.it will ask for the username and password and that's it.
+
+
+   Let's see how we can attach the managed disk to virtual machine -> 1.go to managed disk and create the disk.
+                                                                      2.go to the virtual machine and inside click on disk and click on attach existing disk
+                                                                      3.select the disk we have created and that's it.
+
+
+  * You plan on capturing a custom VM image. Where should the image be added -> Azure compute gallery
+
+  * Which type of Azure resource is required to configure managed disk encryption -> Disk encryption set
+
+  * Which term best reflects the nature of a VM extension -> Software agent 
+
+
+
+Azure Service Resilience:
+
+
+    Let's see how we can enabling virtual machine replication(deploy the virtual machine in another region so that main virtual machine if fails then this
+                                                               back up virtual machine will come up)
+
+          steps:
+                 1.create one virtual machine and inside virtual machine, go to disaster recovery and then select the target region etc.
+                 2.check after some time the virtual machinne is deployed into that region.
+
+
+   * App service(web application), it will automatically backup the data of the web application for every one hour. And you want to manually backup the data
+     to the storage account, for that go to app services and click on the webapplication and inside go to backup and click on the configure custom backup
+     and give the details that's it.
+
+    Load Balancer:
+ 
+     * you can create the load balancer, first go to load balancer and click on create and give the load balancer and resource group
+      then you need to create the forntend ip configuration(public ip for load balancer) and then you need to add the virtual machines and 
+      then you need to create the inbound rules for it and that's it.  
+
+
+   Virtual Machine Scale Set:
+                              it is used to create the virtual machines, based on the traffic it will scale up the virtual machines and if the traffic 
+                              is low then it will scale down the virtual machines and we can add the load balancer also for this.
+
+                              * To create the virtual machine scale set, go to virtual machine scale set then click on create and then provide the details.
+
+
+  Enabling Storage Account Blob file versioning:
+                                                 versioning means when you upload files in the storage account and whenever you change the content of the            
+                                                 file it's saves the changes and it stores the previous version of that file.
+
+                                                 * create the storage account, while creating enable the versioning.
+                                                 * upload the files and then add some new content to the file.
+                                                 * then click on the file and go to version, there you can see the previous version of the file.
+                                                 * you can also download that file.
+
+ * Which type of Azure resource is required for backing up on-premises file servers to the cloud -> Recovery services vault Selected
+
+ * Your organizational disaster recovery plan stipulates that a customer order web application cannot be down for more than 20 minutes. Which term best 
+   relates to this requirement  -> RTO (Recovery Time Objective)
+
+
+
+Databases and Data Analytics:
+                              
+
+   Deploying Azure Database for MYSQL:
+                                       1.go to database and click on Azure Database for MYSQL.
+                                       2.fill the details and then open MYSQL workbench locally to establish the connection.
+                                       3.while entering the username in the MYSQL workbench give username@databasename
+                                       4.if you want to connect to this MYSQL from virtual machine, you need to enable the access in connectivity.
+
+
+
+  Deploying CosmosDB(no-sql database):
+                                       1.go to database and click on Azure CosmosDb
+                                       2.fill the details and that's it.
+
+
+APP Services:
+
+              * we can create the web applications through app services.
+
+    deployment slots in app services:
+                                      it will allow your web app to run different instances called slots. 
+
+                                      * click on the web application and inside go to deployment slot and give name of the web application
+                                      * it will create the new instance of web application called slot(this is used for testing)
+                                      * you can make changes to this new instance and you can swap this new instance with the main instance
+                                        of the web app.
+                                      * to swap this, click on new instance and in the overview you can see swap and click on swap, give source and target.
+
+
+   configuring a web application with custom domain name:
+                                                          by default, the domain name is assigned by azure(azurewebsites.net).
+
+                                                          * go to the web application in the app services and in the overview go to custom domain.
+                                                          * in that click on add custom domain and it will ask for domain name.
+                                                          * for that you have external registered domain name here iam using dodaddy.com
+                                                          * enter the domain name and click on validate.
+                                                          * we need to verify the domain, so we need to add the records in godaddy.com
+                                                          * after adding the record, click on validate and that's it.
+                                                          * our custom domain name is configured.
+
+  Enabling web application HTTPS connectivity:
+                                              we have added the custom domain name and the connectivity is HTTP and is not secure.
+
+                                              * go to key vault and create the key vault and inside add the certificate for custom domain.
+                                              * now come to web application in app services and inside click on TLS/SSL setting.
+                                              * click on import certificate and import it from the key vault.
+                                              * go to custom domain and click on add binding.
+                                              * it will changes to HTTPS and now it is secured.
+
+
+
+ Enabling web application CDN(Content Delivery Network):
+                                                          A content delivery network (CDN) is a distributed network of servers that can efficiently deliver 
+                                                          web content to users. CDNs store cached content on edge servers that are close to end users
+                                                          to minimize latency.
+
+                                                          * go to the web application in the app services and in the overview go to networking.
+                                                          * here you can see azure CDN and click on that, create the CDN that's it.
+
+
+* What is the name of the default web application deployment slot -> Production
+
+* Which benefit can be realized after configuring a website CDN -> Reduced network latency
+
+* What is the default DNS domain suffix for an Azure CDN configuration -> Azureedge.net
+
+* What is the default DNS domain suffix for an Azure web applications -> Azurewebsites.net 
+
+
+
+Network Infrastructure:
+
+
+   Creating DNS Zone:
+                      1.go to private-dns and create it.
+                      2.inside the private-dns, create the record-set.
+                      3.inside the private-dns, click on virtual network link and click on add, select the virtual network.
+
+
+   Creating DNS Zone using CLI:
+                                 1.creating the Private DNS Zone -> az network private-dns zone create -g rg1(resource-group-name) -n hkh.xyz(name-of-dns)
+                                    az network private-dns zone lsit --query [].name -> it will display the private-dns names.
+
+                                 2.creating the record-set in private-dns
+                                                                         -> az network private-dns record-set a(type) add-record -g rg1(resource-group-name)
+                                                                            -z hkh.xyz(name-of-dns) -n www -a 10.10.10.10
+
+                                3.we need to attach this private-dns to virtual network.
+
+  * Inside virtual network, subnet will be present and subnet address range should be fall under virtual network address range.
+
+
+  Creating the Route table:
+                             whenever the virtual machines are deployed in the subnet, these route table(route) acts as firewall for it.
+                            1.go to route table and create it.
+                            2.inside the route table, create the route
+                            3.then add the subnet to it.
+
+
+* Which type of DNS record is used to resolve a FQDN to an IPv6 address -> AAAA
+
+* Which type of DNS record is used to resolve a FQDN to an IPv4 address -> A
+
+* whenever you want to deploy virtual machine in virtual network then the region of the virtual machine and virtual network must be same.
+
+* difference between NSG(Network security Group) and Route table:
+                                                                  * NSGs act like a firewall, controlling inbound and outbound traffic based on security 
+                                                                    rules.
+                                                                  * On the other hand, Azure Route Tables dictate the flow of network traffic within your 
+                                                                    VNet, offering more granular control over routing paths
+
+
+                                                                  * NSG is for both inbound and outbound traffic and is only applied to check if that 
+                                                                    traffic is allowed or blocked.
+ 								  * UDR is only for outbound traffic and is applied post NSG check to decide where to send 
+                                                                    the traffic to.
+
+
+Configuring Azure Vnet Peering:
+                                 Vnet peering means connecting two virtual network together.communicating via private ips.
+
+                                1.go to the virtual netwotk and on left side go to peering and select the two vnets and give some necessary configuration.
+                                  that's it.two vnet will connect.
+
+                                * vnet peering is not transtive i.e vnet1 peering to vnet2 and vnet2 peering to vnet3 and vnet1 is not peering to vnet3.
+
+Managing Azure public IP:
+                          when you want to attach public ip to the virtual machine or load balancer then,
+
+                          1.go to public ip address and create one public ip.
+                          2.go to virtual machine and create it, while creating choose public ip as none.
+                          3.go to public ip address and in the overview, click on association then choose network interface and select the vm.
+                          4.public ip is attached to the virtual machine.
+
+* one VPN gateway is allowed to the one virtual network.
+
+* What is the maximum speed when provisioning an ExpressRoute circuit -> 10 Gbps
+
+* What is required on P2S client devices in order to authenticate to the Azure VPN -> client certificate
+
+* Which network configuration must be in place before configuring an Azure VPN -> A subnet named ‘GatewaySubnet’ must be created
+
+* Which term is used to describe an Azure VPN device -> virtual network gateway
+
+VPN(Virtual Private Network):
+                               remote access to a private network
+
+* Why do PKI certificates use a hashing algorithm during issuance -> ti digitally sign the certificate
+
+
+
+
+
+Migrating to Microsoft Azure:
+                              Azure Import/Export service is used to securely import large amounts of data to Azure Blob storage and Azure Files
+                              by shipping disk drives to an Azure datacenter. This service can also be used to transfer data from Azure Blob storage
+                              to disk drives and ship to your on-premises sites
+
+   steps:
+          1.install the azure import/export tool locally.
+          2.select the disk drive you want to connect with azure.
+          3.format the drive with NTPS as file system and turn on the bitlocker for the drive. and add the files you want to export to azure.
+          4.open powershell locally as administrator and run manage-bde -protectors -get e(disk letter): -> it will display id and password.
+          5.open the import/export tool folder and open powershell as administrator run
+ 
+             .\WAImportExport.exe PrepImport /j:sbdemo.jrn(journel-name) /id:session1(your-own-name) /t:e(disk letter) /bk:password of above 
+             command /srcdir:e\(disk letter)\dstdir:sbdemo/ /blobtype:BlockBlob /skipwrite
+
+          6.this will create the journal file and to print it run notepad sbdemo.jrn -> it will print in notepad.
+          7.open azure and search for azure migration and on left side click on data box.
+          8.choose source country/region has your country and destination where you want to deploy(region) and click on apply.
+          9.click on import/export job and give the storage account name, upload the journal file.
+          10.give random number for carrier account number
+
+  Let's see how we can export data from azure to disk:
+                                                       1.open azure and search for azure migration and on left side click on data box
+                                                       2.choose source region  and destination country where you want to  
+                                                          transferred data and click on apply
+                                                       3.click on import/export job and give details, that's it.
+
+* which types of files are generated when using the waimportexport.exe tool -> JRN and XML
+
+* Which command line tool is used to prep your on-premises storage device for an Azure Import job -> waimportexport.exe
+
+
+
+Azure Storage:
+
+
+     Configuring Azure Managed Disk:
+                                     creating the managed disk and attaching it to the virtual machine.
+                                     1.create the managed disk by thourgh managed disk.
+                                     2.go to virtual machine and select to virtual machine you want to attach it.
+                                     3.inside VM, click on Disks and click on attach existing disk and select the disk that we have created.
+                                     4.virtual machine and managed disk must be in the region.
+
+    * Blob storage is unstructured data storage and files stores structured data .
+
+    * in storage account we can store structured and ununstructured data storage.
+
+    Managing Azure Blob Storage:
+                                 how we can upload files to blob storage in storage account.
+
+                                  1.create the storage account and then select the storage account.
+                                  2.inside click on the containers and create the container.
+                                  3.after creating, click on that container and click on the upload then the files will be uploaded.
+
+    Managing Azure Files Storage:
+                                 how we can upload files to files storage in storage account.
+
+                                  1.create the storage account and then select the storage account.
+                                  2.inside click on the file shares and create the file shares.
+                                  3.after creating, click on that file shares and click on the upload then the files will be uploaded.
+
+
+   Mapping Azure file share to windows:
+                                       we are mapping the content of file share to the local windows machine.
+
+                                       1.create the storage account and then select the storage account.
+                                       2.inside click on the file shares and create the file shares.
+                                       3.after creating, click on that file shares and click on the upload then the files will be uploaded.
+                                       4.inise file share, click on connect and give the details.
+                                       5.it will display the script and copy the script.
+                                       6.open powershell locally and paste it and then run it.
+                                       7.data will be mounted into local machine.
+
+   * Which Windows command can be used to map a drive letter to an Azure File share -> net use
+
+   * hich Linux command can be used to map to an Azure File share -> mount
+
+   * What is the default blob DNS domain suffix -> blob.core.windows.net
+
+   * You would like notifications when blobs are created in a storage account. What should you do -> Enable the blob change feed option
+
+   * What is the default access level for newly created storage account blobs -> private
+
+
+Azure AD:
+
+
+   Creating Azure AD tenants:
+                              1.go to Azure Active Directory and fill the details.That's it tenant will be created.
+                              2.if you want to use the resources using these tenant then you need to take the subscription.
+                                then only you can access the resources.
+                              3.By default, AD tenant domain name is onmicrosoft.com, you can change the domain name.
+                              4.in the overview, click on the custom domain names and give the domain name and validate it.
+
+  Creating Azure AD Users:
+                         1.go to active directory, in the overview click on users and fill the details that's it.
+
+  Creating Azure AD Groups:
+                          1.go to active directory, in the overview click on group and fill the details that's it.
+                          2.nested grouping is also possible(group inside another group).
+
+  Configuring MFA for user:
+                          1.go to active directory, in the overview click on users and then click on Multi Factor Authentication and then click on enable.
+                          2.login with that user and setup the MFA.
+
+  * What is created automatically when a Windows Virtual Desktop host pool is created -> Desktop Application Group
+
+	
+
+
+
+
+
+
+                             
+
+
+
+
+    
+
+
+
+               
+
+
+
+
+                       
+                   
+
+                        
+
+
+
+
+
+
+ 
+
+
+                                                  
+
+
+
+ 
