@@ -9,7 +9,7 @@ Monitoring Services:
                                * only single Vm can be attached to a single log analytics workspace
 
                                 steps:
-                                        1.create the  Log Analytics workspace.
+                                        1.create the Log Analytics workspace.
                                         2.inside the Log Analytics workspace, you can attach the virtual machines to it from the left side bar.
                                         3.you can setup the storage accounts and activity logs.
                       
@@ -20,11 +20,11 @@ Monitoring Services:
                       3.monitor performance
                       4.alerts and dashboard.
 
-       * you enable notification for the vm's for the metrics or logs. for that select vm, on left side on the monitor you can find the alerts.
+       * if you want to enable notification for the vm's for the metrics or logs. for that select vm, on left side on the monitor you can find the alerts.
          there you can create the alerts.
 
        * application insights:
-                                These application insights will give the in depth information about the respective item.
+                                These application insights will give the indepth information about the respective item.
 
        * CSV and PDF file formats are available for downloading Azure Advisor security recommendations
 
@@ -199,7 +199,7 @@ Azure Authentication:
     * azure Single Sign-On(SSO) :
                                    SSO is an microsoft entra ID authentication method.
                                    
-                                   * Removes the need to sign in to each app after initial sucessfull authentication.
+                                   * Removes the need to signin to each app after initial sucessfull authentication.
 
                                    * SSO is of three types 1.federation
                                                            2.password
@@ -232,7 +232,7 @@ Azure Authentication:
 
    * You need to assign permissions to code running in an Azure virtual machine. What should you enable? -> virtual machine managed identity.
 
-   * Which Azure AD configuration results in the creation of a service principal -> enterprise appl
+   * Which Azure AD configuration results in the creation of a service principal -> enterprise application
 
    * Azure authentication method can be used without access to a mobile device -> FIDO 2 security key
 
@@ -254,9 +254,10 @@ Resource Group:
 
 * functionality is unavailable when using the Azure mobile app -> creating azure functions
 
-* What happens when you attempt to delete a resource group that still contains resources? -> All resources deployed in the resource group are deleted with the resource group
+* What happens when you attempt to delete a resource group that still contains resources? -> All resources deployed in the resource group are deleted with    
+  the resource group
 
-*  Which physical security mechanism uses a set of two doors where the outer door must close before the inner door opens? ->Access control vestibule
+* Which physical security mechanism uses a set of two doors where the outer door must close before the inner door opens? ->Access control vestibule
 
 * You are using the Azure CLI in interactive mode. You need to issue numerous storage account commands. 
   Which command should you issue to minimize the amount of typing  -> %%storage
@@ -296,7 +297,7 @@ Azure Software development services:
                                                                                2.In that storage account, create the queue
                                                                                3.In that queue, create the message.
                                                                                4.create the logic app
-                                                                               5.go to storage account and then go to access key and then access key.
+                                                                               5.go to storage account and then go to access key and then copy access key.
                                                                                6.inside the logic app, click on logic app designer
                                                                                  and click on blank logic app
                                                                                7.search for azure queue and then select when there is a message in the queue
@@ -427,8 +428,8 @@ Security and Compliance:
 Azure Virtual Machines:
                          
 
-     Let's see how we can resize the virtual machine -> 1.go to virtual machine and select the virtual mchine you want to resize
-                                                        2.inside virtual size, go to size and select the size you want and click on resize.
+     Let's see how we can resize the virtual machine -> 1.go to virtual machine and select the virtual machine you want to resize
+                                                        2.inside virtual machine, go to size and select the size you want and click on resize.
                                                         3.virtual machine will be resized.
 
 
@@ -455,7 +456,7 @@ Azure Virtual Machines:
 Azure Service Resilience:
 
 
-    Let's see how we can enabling virtual machine replication(deploy the virtual machine in another region so that main virtual machine if fails then this
+    Let's see how we can enabling virtual machine replication(deploy the virtual machine in another region so that main virtual machine fails then this
                                                                back up virtual machine will come up)
 
           steps:
@@ -467,11 +468,11 @@ Azure Service Resilience:
      to the storage account, for that go to app services and click on the webapplication and inside go to backup and click on the configure custom backup
      and give the details that's it.
 
-    Load Balancer:
+   Load Balancer:
  
-     * you can create the load balancer, first go to load balancer and click on create and give the load balancer and resource group
-      then you need to create the forntend ip configuration(public ip for load balancer) and then you need to add the virtual machines and 
-      then you need to create the inbound rules for it and that's it.  
+     * you can create the load balancer, first go to load balancer and click on create and give the load balancer name and resource group
+       then you need to create the forntend ip configuration(public ip for load balancer) and then you need to add the virtual machines and 
+       then you need to create the inbound rules for it and that's it.  
 
 
    Virtual Machine Scale Set:
@@ -504,7 +505,7 @@ Databases and Data Analytics:
                                        1.go to database and click on Azure Database for MYSQL.
                                        2.fill the details and then open MYSQL workbench locally to establish the connection.
                                        3.while entering the username in the MYSQL workbench give username@databasename
-                                       4.if you want to connect to this MYSQL from virtual machine, you need to enable the access in connectivity.
+                                       4.if you want to connect to this MYSQL to virtual machine, you need to enable the access in connectivity.
 
 
 
@@ -645,7 +646,7 @@ Managing Azure public IP:
 VPN(Virtual Private Network):
                                remote access to a private network
 
-* Why do PKI certificates use a hashing algorithm during issuance -> ti digitally sign the certificate
+* Why do PKI certificates use a hashing algorithm during issuance -> to digitally sign the certificate
 
 
 
@@ -661,7 +662,7 @@ Migrating to Microsoft Azure:
           2.select the disk drive you want to connect with azure.
           3.format the drive with NTPS as file system and turn on the bitlocker for the drive. and add the files you want to export to azure.
           4.open powershell locally as administrator and run manage-bde -protectors -get e(disk letter): -> it will display id and password.
-          5.open the import/export tool folder and open powershell as administrator run
+          5.open the import/export tool folder and open powershell as administrator and then run
  
              .\WAImportExport.exe PrepImport /j:sbdemo.jrn(journel-name) /id:session1(your-own-name) /t:e(disk letter) /bk:password of above 
              command /srcdir:e\(disk letter)\dstdir:sbdemo/ /blobtype:BlockBlob /skipwrite
@@ -696,7 +697,7 @@ Azure Storage:
 
     * Blob storage is unstructured data storage and files stores structured data .
 
-    * in storage account we can store structured and ununstructured data storage.
+    * in storage account we can store structured and ununstructured data.
 
     Managing Azure Blob Storage:
                                  how we can upload files to blob storage in storage account.
@@ -719,14 +720,14 @@ Azure Storage:
                                        1.create the storage account and then select the storage account.
                                        2.inside click on the file shares and create the file shares.
                                        3.after creating, click on that file shares and click on the upload then the files will be uploaded.
-                                       4.inise file share, click on connect and give the details.
+                                       4.inside file share, click on connect and give the details.
                                        5.it will display the script and copy the script.
                                        6.open powershell locally and paste it and then run it.
                                        7.data will be mounted into local machine.
 
    * Which Windows command can be used to map a drive letter to an Azure File share -> net use
 
-   * hich Linux command can be used to map to an Azure File share -> mount
+   * Which Linux command can be used to map to an Azure File share -> mount
 
    * What is the default blob DNS domain suffix -> blob.core.windows.net
 
@@ -735,7 +736,7 @@ Azure Storage:
    * What is the default access level for newly created storage account blobs -> private
 
 
-Azure AD:
+Azure AD(Active Directory):
 
 
    Creating Azure AD tenants:
@@ -758,6 +759,104 @@ Azure AD:
 
   * What is created automatically when a Windows Virtual Desktop host pool is created -> Desktop Application Group
 
+
+
+NOTE:
+
+      1. Scaling is of two types:
+                                   1.Vertical Scaling:
+                                                       Increasing the capacity or size of the same VM to bigger one.
+                                   2.Horizontal Scaling:
+                                                         Adding up the new VM's of same capacity or size.
+
+                                   * Manually we need to scale up or scale down the VM's
+
+     2. Elasticity:
+                    Automatically scale up or scale down the VM's.
+
+     3. Difference between IAAS, PAAS and SAAS:
+                                                IAAS(Infrastructure As A Service):
+                                                                                   here we need to take care of entire creating the resource like selecting
+                                                                                   OS and it's size etc.
+
+                                                                                   * Here we have full control over the resources.
+                                                                                 
+                                                                                   * here user is responsible for managing the resources(Admin tasks) and 
+                                                                                     cloud is responsible for maintaining the resources.
+
+                                               PAAS(Platform As a Service):
+                                                                            here we are responsible for developing the application.
+
+                                                                            * here we don't have much control over resources.
+ 
+                                                                            * Admin(selecting OS, its size etc) tasks is managed by the cloud.
+
+                                              SAAS(Software As A service):
+                                                                          here we are responsible for using the data. Everything is managed by cloud.
+
+   4. Redundancy:
+                 Redundancy means having multiple copies or backups of your resources, such as servers, databases, storage, and network components,
+                 across different locations, zones, or regions. This way, if one of them fails or becomes unavailable, you can switch to another one without 
+                 affecting your users or customers.
+
+  5. In Azure, public key is stored in cloud and Private key is stored locally.
+
+  6. to avoid the single point of failure, we will use VM Scale Set.It will automatically scale up or scale down the Vms.
+
+  7. scale out:
+                means whenever the traffic is high(based on the threshold),it will automatically bring up the new VM's to balance the load.
+
+  8. scale in:
+               means whenever the traffic is low then it will automatically bring down VM's and goes back to original position.
+
+  9. Azure Advisor:
+                    It evaluates your azure resources and provides you recommendations.
+
+  10. DDOS protection(Distributed Denial Of a Service):
+                                                        a malicious attempt to disrupt the normal traffic of a targeted server, service or network by 
+                                                        overwhelming the target or its surrounding infrastructure with a flood(lots) of Internet traffic.
+
+                                                        * solution is combination of firewalls and web traffic filters that monitor traffic to an 
+                                                          organization's server, and block or divert traffic in the event of an unexpected surge.
+
+                                                        * they are four stages for DDOS Mitigation:
+                                                                                                    1.Detect
+                                                                                                    2.Response
+                                                                                                    3.Filtering
+                                                                                                    4.Analysis.
+
+  11. VPN Gateway:
+                   Azure VPN Gateway is a service that can be used to send encrypted traffic between an Azure virtual network and on-premises locations over 
+                   the public Internet.
+
+                  * Connect your datacenter(On-Premises) to Azure:
+                                                                   azure VPN Gateway connects your on-premises networks to Azure through Site-to-Site VPNs 
+                                                                   in a similar way that you set up and connect to a remote branch office. The connectivity 
+                                                                   is secure and uses the industry-standard protocols Internet Protocol Security (IPsec) and 
+                                                                   Internet Key Exchange (IKE).
+
+                 * Connect to your Azure virtual networks from anywhere(remote location):
+                                                                                          Point-to-Site VPN lets you connect to your virtual machines on 
+                                                                                          Azure virtual networks from anywhere, whether you are on the road, 
+                                                                                          working from your favorite café, managing your deployment, or 
+                                                                                          doing a demo for your customers.
+                * less cost
+
+
+ 12. Express Route:
+                    to create private connections between Azure datacenters and infrastructure on premises or in a colocation environment. ExpressRoute 
+                    connections don't route through the public internet, and they offer more reliability, faster speed, and lower latency than typical 
+                    internet connections.
+ 
+                    * it is costly.
+
+                  
+                                                        
+
+  
+
+                                                                
+
 	
 
 
@@ -765,7 +864,7 @@ Azure AD:
 
 
 
-                             
+                              
 
 
 
