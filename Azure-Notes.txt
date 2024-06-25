@@ -784,7 +784,7 @@ NOTE:
                                                                                    * here user is responsible for managing the resources(Admin tasks) and 
                                                                                      cloud is responsible for maintaining the resources.
 
-                                               PAAS(Platform As a Service):
+                                               PAAS(Platform As A Service):
                                                                             here we are responsible for developing the application.
 
                                                                             * here we don't have much control over resources.
@@ -804,7 +804,7 @@ NOTE:
   6. to avoid the single point of failure, we will use VM Scale Set.It will automatically scale up or scale down the Vms.
 
   7. scale out:
-                means whenever the traffic is high(based on the threshold),it will automatically bring up the new VM's to balance the load.
+                means whenever the traffic is high(based on the threshold given),it will automatically bring up the new VM's to balance the load.
 
   8. scale in:
                means whenever the traffic is low then it will automatically bring down VM's and goes back to original position.
